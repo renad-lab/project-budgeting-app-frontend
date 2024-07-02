@@ -34,7 +34,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Transactions from "../Transactions/Transactions";
-// import TransactionChart from "../TransactionChart/TransactionChart";
+import TransactionChart from "../TransactionChart/TransactionChart";
 import "./Home.css";
 
 const Home = () => {
@@ -55,7 +55,7 @@ const Home = () => {
       <Transactions transactions={transactions} />
       <div className="charts-container">
         <h2>Charts</h2>
-        {/* <TransactionChart transactions={transactions} /> */}
+        <TransactionChart />
       </div>
     </div>
   );

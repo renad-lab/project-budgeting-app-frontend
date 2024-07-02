@@ -1,7 +1,6 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 import transactions from "../../data/data.json";
-import "./TransactionChart.css";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -43,14 +42,14 @@ const processData = (data) => {
   return categories;
 };
 
-const LineGraph = () => {
+const TransactionChart = () => {
   const categoriesData = processData(transactions);
 
   const data = {
     labels: Object.keys(categoriesData),
     datasets: [
       {
-        label: "Total Amount",
+        label: "Total Amount ($)",
         data: Object.values(categoriesData).map((category) =>
           category.totalAmount.toFixed(2)
         ),
@@ -140,4 +139,4 @@ const tableCellStyle = {
   textAlign: "center",
 };
 
-export default LineGraph;
+export default TransactionChart;
