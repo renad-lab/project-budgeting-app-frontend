@@ -1,39 +1,46 @@
+/* NavBar.css */
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+
 .navbar {
-  background-color: #4a2c19;
-  padding: 10px;
-  color: #f7f3f0;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  background-color: #f8f9fa;
+  padding: 10px 20px;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .logo {
-  font-size: 1.8rem;
+  font-family: "Shadows Into Light", cursive;
+  font-size: 2rem;
   margin: 0;
-  color: #f7f3f0;
-  flex: 1;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+}
+
+.budget-tracker {
+  font-family: Arial, sans-serif;
+  font-size: small;
+  font-variant: small-caps;
+  margin-top: 5px;
 }
 
 .nav-links {
-  list-style-type: none;
-  padding: 0;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.nav-links li {
-  margin-left: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .nav-link {
-  color: #f7f3f0;
   text-decoration: none;
-  font-size: 1rem;
+  color: #000;
+  margin-left: 20px;
+  font-size: 16px;
   font-weight: bold;
-  transition: color 0.3s ease;
 }
 
 .nav-link:hover {

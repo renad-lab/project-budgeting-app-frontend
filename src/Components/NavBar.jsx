@@ -1,12 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./NavBar.css"; // Import your CSS file
-
+import "./NavBar.css";
 const NavBar = () => {
   return (
     <div>
       <nav className="navbar">
-        <h1 className="logo">Bean There, Done That Budget Tracker</h1>
+        <h1 className="logo">
+          <Link to="/transactions">
+            <i>Wild Beans</i>
+          </Link>
+          <br />
+          <span className="budget-tracker">
+            tracker for a tiny coffee bean shop on etsy
+          </span>
+        </h1>
         <ul className="nav-links">
           <li>
             <Link to="/transactions" className="nav-link">
