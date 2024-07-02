@@ -33,7 +33,8 @@
 
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Transactions from "../Components/Transactions";
+import Transactions from "../Transactions/Transactions";
+// import TransactionChart from "../TransactionChart/TransactionChart";
 import "./Home.css";
 
 const Home = () => {
@@ -53,9 +54,8 @@ const Home = () => {
     <div className="home-container">
       <Transactions transactions={transactions} />
       <div className="charts-container">
-        {/* Insert charts content here */}
         <h2>Charts</h2>
-        <p>This is where charts will appear.</p>
+        {/* <TransactionChart transactions={transactions} /> */}
       </div>
     </div>
   );

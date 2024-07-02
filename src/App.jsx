@@ -1,10 +1,10 @@
 import "./App.css";
-import NavBar from "./Components/NavBar";
+import NavBar from "./Components/NavBar/NavBar";
 // import Home from "./Components/Home";
-import Show from "./Pages/Show";
-import New from "./Pages/New";
+import Show from "./Components/Show/Show";
+import New from "./Components/New/New";
 // import Edit from "./Components/Edit";
-import Home from "./Pages/Home";
+import Home from "./Components/Home/Home";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 function App() {

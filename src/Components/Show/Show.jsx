@@ -65,6 +65,7 @@ const Show = () => {
   const navigate = useNavigate();
   const API = import.meta.env.VITE_BASE_URL;
 
+  // Function to handle deletion of a transaction
   const handleDelete = () => {
     fetch(`${API}/${index}`, {
       method: "DELETE",
@@ -76,6 +77,7 @@ const Show = () => {
       .catch((err) => console.error(err));
   };
 
+  // Effect to fetch transaction details on component mount
   useEffect(() => {
     fetch(`${API}/${index}`)
       .then((res) => res.json())
@@ -85,42 +87,57 @@ const Show = () => {
 
   return (
     <div className="show-container">
-      {transaction && (
-        <div>
-          <h1 className="show-title">Transaction Details</h1>
-          <div className="show-details">
-            <p className="show-label">ID:</p>
-            <p className="show-value">{transaction.id}</p>
-            <p className="show-label">Date:</p>
-            <p className="show-value">{transaction.date}</p>
-            <p className="show-label">Description:</p>
-            <p className="show-value">{transaction.description}</p>
-            <p className="show-label">Amount:</p>
-            <p className="show-value">${transaction.amount}</p>
-            <p className="show-label">Quantity:</p>
-            <p className="show-value">{transaction.quantity}</p>
-            <p className="show-label">Unit:</p>
-            <p className="show-value">{transaction.unit}</p>
-            <p className="show-label">Vendor:</p>
-            <p className="show-value">{transaction.entity}</p>
-            <p className="show-label">Best By:</p>
-            <p className="show-value">{transaction.best_by}</p>
-            <p className="show-label">Recurring:</p>
-            <p className="show-value">{transaction.recurring ? "Yes" : "No"}</p>
-            <p className="show-label">Origin:</p>
-            <p className="show-value">{transaction.origin}</p>
-            <p className="show-label">Roast Level:</p>
-            <p className="show-value">{transaction.roast_level}</p>
-          </div>
+      <h1 className="show-title">Transaction Details</h1>
 
-          <div className="show-actions">
-            <Link to={`/transactions/${index}/edit`}>
-              <button>Edit</button>
-            </Link>
-            <button onClick={handleDelete}>Delete</button>
-          </div>
+      {transaction && (
+        <div className="show-details">
+          <p className="show-label">
+            ID: <span className="show-value">{transaction.id}</span>
+          </p>
+          <p className="show-label">
+            Date: <span className="show-value">{transaction.date}</span>
+          </p>
+          <p className="show-label">
+            Description:{" "}
+            <span className="show-value">{transaction.description}</span>
+          </p>
+          <p className="show-label">
+            Amount: <span className="show-value">${transaction.amount}</span>
+          </p>
+          <p className="show-label">
+            Quantity: <span className="show-value">{transaction.quantity}</span>
+          </p>
+          <p className="show-label">
+            Unit: <span className="show-value">{transaction.unit}</span>
+          </p>
+          <p className="show-label">
+            Vendor: <span className="show-value">{transaction.entity}</span>
+          </p>
+          <p className="show-label">
+            Best By: <span className="show-value">{transaction.best_by}</span>
+          </p>
+          <p className="show-label">
+            Recurring:{" "}
+            <span className="show-value">
+              {transaction.recurring ? "Yes" : "No"}
+            </span>
+          </p>
+          <p className="show-label">
+            Origin: <span className="show-value">{transaction.origin}</span>
+          </p>
+          <p className="show-label">
+            Roast Level:{" "}
+            <span className="show-value">{transaction.roast_level}</span>
+          </p>
         </div>
       )}
+
+      <div className="show-actions">
+        <Link to={`/transactions/${index}/edit`}>
+          <button>Edit</button>
+        </Link>
+        <button onClick={handleDelete}>Delete</button>
+      </div>
     </div>
   );
 };
