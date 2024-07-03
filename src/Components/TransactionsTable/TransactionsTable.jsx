@@ -31,9 +31,14 @@ const TransactionsTable = ({ transactions }) => {
   );
 
   // Calculate net income
-  const netIncome = transactions.reduce((total, transaction) => {
-    return total + transaction.amount;
-  }, 0);
+  const netIncome = React.useMemo(
+    () =>
+      transactions.reduce(
+        (total, transaction) => total + transaction.amount,
+        0
+      ),
+    [transactions]
+  );
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data: transactions });
@@ -43,10 +48,12 @@ const TransactionsTable = ({ transactions }) => {
       <h2>Transactions</h2>
       <table {...getTableProps()} className="table">
         <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+          {headerGroups.map((headerGroup, index) => (
+            <tr {...headerGroup.getHeaderGroupProps()} key={`header-${index}`}>
+              {headerGroup.headers.map((column, idx) => (
+                <th {...column.getHeaderProps()} key={`header-${index}-${idx}`}>
+                  {column.render("Header")}
+                </th>
               ))}
             </tr>
           ))}
@@ -55,15 +62,17 @@ const TransactionsTable = ({ transactions }) => {
           {rows.map((row) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()}>
+              <tr {...row.getRowProps()} key={`row-${row.id}`}>
                 {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  <td {...cell.getCellProps()} key={`cell-${cell.column.id}`}>
+                    {cell.render("Cell")}
+                  </td>
                 ))}
               </tr>
             );
           })}
           {/* Net Income Row */}
-          <tr>
+          <tr key="net-income">
             <td colSpan={2} style={{ textAlign: "right" }}>
               <strong>Net Income:</strong>
             </td>
