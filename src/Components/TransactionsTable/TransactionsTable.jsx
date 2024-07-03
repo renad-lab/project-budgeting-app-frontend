@@ -21,7 +21,9 @@ const TransactionsTable = ({ transactions }) => {
         accessor: "amount",
         Cell: ({ value }) => (
           <span className={value < 0 ? "negative" : "positive"}>
-            ${Math.abs(value).toFixed(2)}
+            {value < 0
+              ? `- $${Math.abs(value).toFixed(2)}`
+              : `$${value.toFixed(2)}`}
           </span>
         ),
         className: "amount",
@@ -64,7 +66,11 @@ const TransactionsTable = ({ transactions }) => {
             return (
               <tr {...row.getRowProps()} key={`row-${row.id}`}>
                 {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()} key={`cell-${cell.column.id}`}>
+                  <td
+                    {...cell.getCellProps()}
+                    key={`cell-${cell.column.id}`}
+                    className={cell.column.className}
+                  >
                     {cell.render("Cell")}
                   </td>
                 ))}
@@ -76,7 +82,7 @@ const TransactionsTable = ({ transactions }) => {
             <td colSpan={2} style={{ textAlign: "right" }}>
               <strong>Net Income:</strong>
             </td>
-            <td>
+            <td className="amount">
               <strong>${netIncome.toFixed(2)}</strong>
             </td>
           </tr>

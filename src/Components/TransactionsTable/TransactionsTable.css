@@ -1,49 +1,41 @@
-/* TransactionsTable.css * */
+.negative {
+  color: red;
+}
 
-.transactions-table {
-  margin-top: 20px;
+.positive {
+  color: green; /* Optional: style for positive amounts */
+}
+
+.amount {
+  text-align: right;
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid #ddd;
-  font-size: 14px;
+  table-layout: auto; /* Adjust column widths based on content */
 }
 
 .table th,
 .table td {
   border: 1px solid #ddd;
   padding: 8px;
-  text-align: left;
 }
 
 .table th {
   background-color: #f2f2f2;
+  text-align: left;
 }
 
-.table td.amount {
-  text-align: right;
+/* Optional: Adjust the width of specific columns */
+.table .date-column {
+  width: 150px; /* Adjust as needed */
 }
 
-.table td.amount span {
-  font-weight: bold;
+.table .description-column {
+  width: 300px; /* Adjust as needed */
 }
 
-.table td.amount span.positive {
-  color: green;
-}
-
-.table td.amount span.negative {
-  color: red;
-}
-
-.table tfoot td {
-  text-align: right;
-  font-weight: bold;
-  padding-top: 8px;
-}
-
-.table tfoot td.total {
-  background-color: #f2f2f2;
+.table .amount-column {
+  width: 150px; /* Adjust as needed */
 }
