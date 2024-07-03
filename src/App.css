@@ -1,5 +1,18 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
 
 * {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Shadows Into Light', Arial, Helvetica, sans-serif;
 } */
+
+body {
+  background-image: url("https://source.unsplash.com/1600x900/?coffeebeans");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  color: #333;
+}
