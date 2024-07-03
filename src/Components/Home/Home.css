@@ -1,51 +1,36 @@
+/* Home.css */
+
 .home-container {
-  display: flex;
-  justify-content: space-around; /* Spacing around items */
   padding: 20px;
-  background-color: #f9f9f9;
 }
 
-.transactions-container {
-  flex: 1; /* Take up half of the screen */
-  padding-right: 20px; /* Add spacing between transactions and charts */
+.content-container {
+  display: flex;
+  justify-content: space-between;
 }
 
-.transaction-list {
-  margin-top: 20px;
-}
-
-.transaction-item {
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.transaction-link {
-  display: block;
-  text-decoration: none;
-  color: #333;
-  transition: color 0.3s ease;
-}
-
-.transaction-link:hover {
-  color: #bf8040;
-}
-
-.transaction-date {
-  font-weight: bold;
-}
-
-.transaction-description {
-  margin-left: 10px;
-}
-
+.transactions-table-container,
 .charts-container {
-  flex: 1; /* Take up half of the screen */
-  padding-left: 20px; /* Add spacing between transactions and charts */
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  flex: 1;
+  margin: 10px;
+}
+
+.transactions-table-container {
+  margin-right: 20px;
+}
+
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transactions-table th,
+.transactions-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.transactions-table th {
+  background-color: #f2f2f2;
+  text-align: left;
 }
