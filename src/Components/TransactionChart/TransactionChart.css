@@ -60,3 +60,12 @@
 .data-table .net-income.negative {
   color: red;
 }
+
+.content-container {
+  display: flex;
+  justify-content: center;
+}
+
+.charts-container {
+  flex-grow: 1;
+}
