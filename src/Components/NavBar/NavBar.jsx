@@ -7,19 +7,19 @@ const NavBar = () => {
       <nav className="navbar">
         <h1 className="logo">
           <Link to="/transactions">
-            <i>Wild Beans</i>
+            <i>Coffeebeanies</i>
           </Link>
           <br />
           <span className="budget-tracker">
-            tracker for a tiny coffee bean shop on etsy
+            business tracker for a tiny coffee bean shop on etsy
           </span>
         </h1>
         <ul className="nav-links">
-          <li>
+          {/* <li>
             <Link to="/transactions" className="nav-link">
               Transactions
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/transactions/new" className="nav-link">
               Add Transaction

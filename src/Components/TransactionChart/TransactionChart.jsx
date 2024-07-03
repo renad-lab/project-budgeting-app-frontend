@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Bar } from "react-chartjs-2";
 import "./TransactionChart.css";
 import {
@@ -20,27 +20,49 @@ ChartJS.register(
   Legend
 );
 
-import transactions from "../../data/data.json";
+const TransactionChart = () => {
+  const [transactionsData, setTransactionsData] = useState(null);
 
-const processData = (data) => {
-  const result = {
-    income: 0,
-    expense: 0,
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:4001/transactions");
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const data = await response.json();
+        setTransactionsData(data); // Assuming data is an array of transactions from data.json
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const processData = (data) => {
+    if (!data) return { income: 0, expense: 0 };
+
+    const result = {
+      income: 0,
+      expense: 0,
+    };
+
+    data.forEach((transaction) => {
+      if (transaction.type === "income") {
+        result.income += Number(transaction.amount);
+      } else if (transaction.type === "expense") {
+        result.expense += Math.abs(Number(transaction.amount));
+      }
+    });
+
+    return result;
   };
 
-  data.forEach((transaction) => {
-    if (transaction.type === "income") {
-      result.income += Number(transaction.amount);
-    } else if (transaction.type === "expense") {
-      result.expense += Math.abs(Number(transaction.amount));
-    }
-  });
+  const { income, expense } = processData(transactionsData);
+  const netIncome = income - expense;
+  const netIncomeClass = netIncome >= 0 ? "positive" : "negative";
 
-  return result;
-};
-
-const TransactionChart = () => {
-  const { income, expense } = processData(transactions);
   console.log("Processed data:", { income, expense });
 
   const data = {
@@ -101,11 +123,17 @@ const TransactionChart = () => {
           <tbody>
             <tr>
               <td>Income</td>
-              <td>{income.toFixed(2)}</td>
+              <td className="amount income">{income.toFixed(2)}</td>
             </tr>
             <tr>
               <td>Expense</td>
-              <td>{expense.toFixed(2)}</td>
+              <td className="amount expense">{expense.toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td>Net Income</td>
+              <td className={`amount net-income ${netIncomeClass}`}>
+                {netIncome.toFixed(2)}
+              </td>
             </tr>
           </tbody>
         </table>
