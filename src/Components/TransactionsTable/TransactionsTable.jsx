@@ -12,12 +12,12 @@ const TransactionsTable = ({ transactions }) => {
         width: 80,
         textAlign: "center",
         className: "date-column",
-      }, // Updated Date column definition
+      },
       {
         Header: "Description",
         accessor: "description",
         width: 350,
-        className: "description-column", // Added class for Description column
+        className: "description-column",
         Cell: ({ row }) => (
           <Link to={`/transactions/${row.original.id}`}>
             {row.original.description}
@@ -28,9 +28,12 @@ const TransactionsTable = ({ transactions }) => {
         Header: "Amount ($)",
         accessor: "amount",
         width: 80,
-        className: "amount-column", // Added class for Amount column
+        className: "amount-column",
         Cell: ({ value }) => (
-          <span className={value < 0 ? "negative" : "positive"}>
+          <span
+            className={`${value < 0 ? "negative" : "positive"} amount`}
+            style={{ textAlign: "right" }}
+          >
             {value < 0
               ? `- $${Math.abs(value)
                   .toFixed(2)
@@ -38,13 +41,11 @@ const TransactionsTable = ({ transactions }) => {
               : `$${value.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
           </span>
         ),
-        className: "amount",
       },
     ],
     []
   );
 
-  // Calculate net income
   const netIncome = React.useMemo(
     () =>
       transactions.reduce(
@@ -68,7 +69,7 @@ const TransactionsTable = ({ transactions }) => {
                 <th
                   {...column.getHeaderProps()}
                   key={`header-${index}-${idx}`}
-                  style={{ width: column.width, textAlign: "center" }} // Center align headers
+                  style={{ width: column.width, textAlign: "center" }}
                 >
                   {column.render("Header")}
                 </th>
@@ -86,6 +87,9 @@ const TransactionsTable = ({ transactions }) => {
                     {...cell.getCellProps()}
                     key={`cell-${cell.column.id}`}
                     className={`${cell.column.className} cell-text`}
+                    style={{
+                      textAlign: cell.column.id === "amount" ? "right" : "left",
+                    }}
                   >
                     {cell.render("Cell")}
                   </td>
@@ -98,7 +102,7 @@ const TransactionsTable = ({ transactions }) => {
             <td colSpan={2} style={{ textAlign: "right" }}>
               <strong>Net Income:</strong>
             </td>
-            <td className="amount">
+            <td className="amount" style={{ textAlign: "right" }}>
               <strong>
                 ${netIncome.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </strong>
