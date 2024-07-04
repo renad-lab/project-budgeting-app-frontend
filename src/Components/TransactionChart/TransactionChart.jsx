@@ -1,150 +1,4 @@
-// import React, { useState, useEffect } from "react";
-// import { Bar } from "react-chartjs-2";
-// import "./TransactionChart.css";
-// import {
-//   Chart as ChartJS,
-//   CategoryScale,
-//   LinearScale,
-//   BarElement,
-//   Title,
-//   Tooltip,
-//   Legend,
-// } from "chart.js";
-
-// ChartJS.register(
-//   CategoryScale,
-//   LinearScale,
-//   BarElement,
-//   Title,
-//   Tooltip,
-//   Legend
-// );
-
-// const TransactionChart = () => {
-//   const [transactionsData, setTransactionsData] = useState(null);
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await fetch("http://localhost:4001/transactions");
-//         if (!response.ok) {
-//           throw new Error("Failed to fetch data");
-//         }
-//         const data = await response.json();
-//         setTransactionsData(data); // Assuming data is an array of transactions from data.json
-//       } catch (error) {
-//         console.error("Error fetching data:", error);
-//       }
-//     };
-
-//     fetchData();
-//   }, []);
-
-//   const processData = (data) => {
-//     if (!data) return { income: 0, expense: 0 };
-
-//     const result = {
-//       income: 0,
-//       expense: 0,
-//     };
-
-//     data.forEach((transaction) => {
-//       if (transaction.type === "income") {
-//         result.income += Number(transaction.amount);
-//       } else if (transaction.type === "expense") {
-//         result.expense += Math.abs(Number(transaction.amount));
-//       }
-//     });
-
-//     return result;
-//   };
-
-//   const { income, expense } = processData(transactionsData);
-//   const netIncome = income - expense;
-//   const netIncomeClass = netIncome >= 0 ? "positive" : "negative";
-
-//   console.log("Processed data:", { income, expense });
-
-//   const data = {
-//     labels: ["Income", "Expense"],
-//     datasets: [
-//       {
-//         label: "Amount ($)",
-//         data: [income, expense],
-//         backgroundColor: ["rgba(75, 192, 192, 0.6)", "rgba(255, 99, 132, 0.6)"],
-//         borderColor: ["rgb(75, 192, 192)", "rgb(255, 99, 132)"],
-//         borderWidth: 1,
-//       },
-//     ],
-//   };
-
-//   const options = {
-//     responsive: true,
-//     maintainAspectRatio: false,
-//     scales: {
-//       y: {
-//         beginAtZero: true,
-//         title: {
-//           display: true,
-//           text: "Amount ($)",
-//         },
-//       },
-//     },
-//     plugins: {
-//       legend: {
-//         display: false,
-//       },
-//       title: {
-//         display: true,
-//         text: "Income vs Expense",
-//       },
-//     },
-//   };
-
-//   console.log("Chart data:", data);
-
-//   return (
-//     <div className="transaction-chart">
-//       <div className="chart-container">
-//         {income === 0 && expense === 0 ? (
-//           <p className="no-data">No transaction data available</p>
-//         ) : (
-//           <Bar options={options} data={data} />
-//         )}
-//       </div>
-//       <div className="table-container">
-//         <table className="data-table">
-//           <thead>
-//             <tr>
-//               <th>Type</th>
-//               <th>Total Amount ($)</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             <tr>
-//               <td>Income</td>
-//               <td className="amount income">{income.toFixed(2)}</td>
-//             </tr>
-//             <tr>
-//               <td>Expense</td>
-//               <td className="amount expense">{expense.toFixed(2)}</td>
-//             </tr>
-//             <tr>
-//               <td>Net Income</td>
-//               <td className={`amount net-income ${netIncomeClass}`}>
-//                 {netIncome.toFixed(2)}
-//               </td>
-//             </tr>
-//           </tbody>
-//         </table>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default TransactionChart;
-
-import React, { useState, useEffect } from "react";
+import React, { useMemo } from "react";
 import { Bar } from "react-chartjs-2";
 import "./TransactionChart.css";
 import {
@@ -166,59 +20,55 @@ ChartJS.register(
   Legend
 );
 
-const TransactionChart = () => {
-  const [transactionsData, setTransactionsData] = useState(null);
+const TransactionChart = ({ transactions }) => {
+  // Calculate income, expense, and net income from transactions
+  const { income, expense, netIncome } = useMemo(() => {
+    if (!transactions || transactions.length === 0) {
+      return {
+        income: 0,
+        expense: 0,
+        netIncome: 0,
+      };
+    }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:4001/transactions");
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
+    const result = transactions.reduce(
+      (acc, transaction) => {
+        if (transaction.type === "income") {
+          acc.income += Number(transaction.amount);
+        } else if (transaction.type === "expense") {
+          acc.expense += Math.abs(Number(transaction.amount));
         }
-        const data = await response.json();
-        setTransactionsData(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+        return acc;
+      },
+      { income: 0, expense: 0 }
+    );
+
+    return {
+      income: result.income,
+      expense: result.expense,
+      netIncome: result.income - result.expense,
     };
+  }, [transactions]);
 
-    fetchData();
-  }, []);
-
-  const processData = (data) => {
-    if (!data) return { income: 0, expense: 0 };
-
-    const result = {
-      income: 0,
-      expense: 0,
-    };
-
-    data.forEach((transaction) => {
-      if (transaction.type === "income") {
-        result.income += Number(transaction.amount);
-      } else if (transaction.type === "expense") {
-        result.expense += Math.abs(Number(transaction.amount));
-      }
-    });
-
-    return result;
-  };
-
-  const { income, expense } = processData(transactionsData);
-  const netIncome = income - expense;
-  const netIncomeClass = netIncome >= 0 ? "positive" : "negative";
-
-  console.log("Processed data:", { income, expense });
-
+  // Prepare chart data and options
   const data = {
-    labels: ["Income", "Expense"],
+    labels: ["Income", "Expense", "Net Income"],
     datasets: [
       {
         label: "Amount ($)",
-        data: [income, expense],
-        backgroundColor: ["rgba(75, 192, 192, 0.6)", "rgba(255, 99, 132, 0.6)"],
-        borderColor: ["rgb(75, 192, 192)", "rgb(255, 99, 132)"],
+        data: [income, expense, netIncome],
+        backgroundColor: [
+          "rgba(75, 192, 192, 0.6)",
+          "rgba(255, 99, 132, 0.6)",
+          netIncome >= 0
+            ? "rgba(75, 192, 192, 0.6)"
+            : "rgba(255, 99, 132, 0.6)",
+        ],
+        borderColor: [
+          "rgb(75, 192, 192)",
+          "rgb(255, 99, 132)",
+          netIncome >= 0 ? "rgb(75, 192, 192)" : "rgb(255, 99, 132)",
+        ],
         borderWidth: 1,
       },
     ],
@@ -238,7 +88,7 @@ const TransactionChart = () => {
     },
     plugins: {
       legend: {
-        display: false,
+        display: true,
       },
       title: {
         display: true,
@@ -247,15 +97,13 @@ const TransactionChart = () => {
     },
   };
 
-  console.log("Chart data:", data);
-
   return (
     <div className="transaction-chart">
       <div className="chart-container">
-        {income === 0 && expense === 0 ? (
-          <p className="no-data">No transaction data available</p>
-        ) : (
+        {transactions && transactions.length > 0 ? (
           <Bar options={options} data={data} />
+        ) : (
+          <p className="no-data">No transaction data available</p>
         )}
       </div>
       <div className="table-container">
@@ -277,7 +125,11 @@ const TransactionChart = () => {
             </tr>
             <tr>
               <td>Net Income</td>
-              <td className={`amount net-income ${netIncomeClass}`}>
+              <td
+                className={`amount net-income ${
+                  netIncome >= 0 ? "positive" : "negative"
+                }`}
+              >
                 {netIncome.toLocaleString()}
               </td>
             </tr>
