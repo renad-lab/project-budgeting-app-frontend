@@ -1,5 +1,57 @@
-.transactions-table {
+/* .transactions-table {
   font-family: Arial, sans-serif; 
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center; /* Center align all table cells */
+}
+
+.table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.amount {
+  text-align: right; /* Right align amount cells */
+}
+
+.cell-text {
+  font-family: Arial, sans-serif; /* Set font-family to Arial for cell text */
+}
+
+.date-column {
+  width: 80px; /* Date column width */
+  text-align: center; /* Center align Date column content */
+}
+
+.description-column {
+  width: 350px; /* Description column width */
+}
+
+.amount-column {
+  width: 80px; /* Amount column width */
+}
+
+.negative {
+  color: red;
+}
+
+.positive {
+  color: green; /* Optional: style for positive amounts */
+} */
+
+
+.transactions-table {
+  font-family: Arial, sans-serif;
+}
 
 .table {
   width: 100%;
@@ -12,6 +64,7 @@
   border: 1px solid #ddd;
   padding: 8px;
   text-align: center; /* Center align all table cells */
+  color: black; /* Set font color to black */
 }
 
 .table th {

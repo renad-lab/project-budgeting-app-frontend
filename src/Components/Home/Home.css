@@ -1,4 +1,4 @@
-/* Home.css */
+/* Home.css
 
 .home-container {
   padding: 20px;
@@ -33,4 +33,29 @@
 .transactions-table th {
   background-color: #f2f2f2;
   text-align: left;
+} */
+
+.home-container {
+  background-image: url("Brown White Coffee Bean Photo Humor Message Instagram Post.jpg"); /* Assuming the image file is named like this */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%; /* Adjust height as needed */
+  overflow: auto; /* Ensures content can scroll if needed */
+}
+
+.content-container {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.transactions-table-container {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.charts-container {
+  flex: 1;
 }

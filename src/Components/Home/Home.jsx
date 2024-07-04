@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Transactions from "../Transactions/Transactions";
 import TransactionChart from "../TransactionChart/TransactionChart";
-import TransactionsTable from "../TransactionsTable/TransactionsTable"; // Import the TransactionsTable component
+import TransactionsTable from "../TransactionsTable/TransactionsTable";
 import "./Home.css";
 
 const Home = () => {
@@ -16,6 +16,7 @@ const Home = () => {
       })
       .catch((err) => console.error(err));
   }, []);
+  console.log(transactions, "transactions");
 
   return (
     <div className="home-container">

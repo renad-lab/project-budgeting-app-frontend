@@ -1,5 +1,5 @@
 /* NavBar.css */
-@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
 
 .navbar {
   display: flex;
@@ -46,4 +46,20 @@
 
 .nav-link:hover {
   color: #bf8040;
+} */
+
+.logo {
+  text-decoration: none;
+  font-size: 1.6rem;
+  color: whitesmoke;
+}
+
+.budget-tracker {
+  font-size: 0.8rem;
+  color: whitesmoke;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: whitesmoke;
 }
