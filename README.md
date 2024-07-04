@@ -56,7 +56,7 @@ This project is a frontend application for managing and visualizing financial tr
 
 ## Deployment
 
-The project is deployed on Netlify. You can access it [here](https://tangerine-bonbon-e696bb.netlify.app/transactions).
+The project is deployed on Netlify. You can access it [here](https://tangerine-bonbon-e696bb.netlify.app).
 
 ## Contributing
 
@@ -73,19 +73,3 @@ This project is licensed under the MIT License.
 - [React Table](https://react-table.tanstack.com/)
 - [React Router](https://reactrouter.com/)
 - [Vite](https://vitejs.dev/)
-
----
-
-### Screenshots
-
-#### Home Page
-
-![Home Page](./screenshots/home.png)
-
-#### Transactions Table
-
-![Transactions Table](./screenshots/transactions-table.png)
-
-#### Transaction Details
-
-![Transaction Details](./screenshots/transaction-details.png)
