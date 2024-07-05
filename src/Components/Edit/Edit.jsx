@@ -1,5 +1,6 @@
 // import React, { useState, useEffect } from "react";
 // import { Link, useNavigate, useParams } from "react-router-dom";
+// // import "./Edit.css";
 
 // const Edit = () => {
 //   const API = import.meta.env.VITE_BASE_URL;
@@ -18,16 +19,21 @@
 //     fetch(`${API}/${index}`)
 //       .then((res) => res.json())
 //       .then((res) => {
-//         setTransaction((prevState) => res);
+//         // Update transaction state with fetched data
+//         setTransaction(res); // Assuming res is the fetched transaction object
 //       })
 //       .catch((err) => console.log(err));
-//   }, [index]);
+//   }, [API, index]);
 
 //   const handleChange = (e) => {
-//     // console.log(e)
-//     setTransaction((prevState) => {
-//       return { ...prevState, [e.target.name]: e.target.value };
-//     });
+//     const { name, value, type, checked } = e.target;
+//     // Use value based on input type
+//     const updatedValue = type === "checkbox" ? checked : value;
+
+//     setTransaction((prevState) => ({
+//       ...prevState,
+//       [name]: updatedValue,
+//     }));
 //   };
 
 //   const handleSubmit = (e) => {
@@ -116,6 +122,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import "./Edit.css";
 
 const Edit = () => {
   const API = import.meta.env.VITE_BASE_URL;
@@ -170,45 +177,50 @@ const Edit = () => {
 
   if (!transaction) return <div>Loading...</div>;
   return (
-    <div>
+    <div className="edit-container">
       <form onSubmit={handleSubmit}>
         <fieldset>
           <legend>Edit Transaction</legend>
+          <label htmlFor="item_name">Item Name</label>
           <input
             type="text"
-            placeholder="Item Name"
+            id="item_name"
             name="item_name"
             value={transaction.item_name}
             onChange={handleChange}
           />
           <br />
+          <label htmlFor="amount">Amount</label>
           <input
             type="number"
-            placeholder="Amount"
+            id="amount"
             name="amount"
             value={transaction.amount}
             onChange={handleChange}
           />
           <br />
+          <label htmlFor="date">Date</label>
           <input
             type="date"
-            placeholder="Date"
+            id="date"
             name="date"
             value={transaction.date}
             onChange={handleChange}
           />
           <br />
+          <label htmlFor="from">From</label>
           <input
             type="text"
-            placeholder="From"
+            id="from"
             name="from"
             value={transaction.from}
             onChange={handleChange}
           />
           <br />
+          <label htmlFor="category">Category</label>
           <input
             type="text"
-            placeholder="Category"
+            id="category"
             name="category"
             value={transaction.category}
             onChange={handleChange}
@@ -226,8 +238,8 @@ const Edit = () => {
           <input type="submit" value="Submit" />
         </fieldset>
       </form>
-      <Link to={`/transactions/${index}`}>
-        <button>Back</button>
+      <Link to={`/transactions/${index}`} className="link-back">
+        Back
       </Link>
     </div>
   );

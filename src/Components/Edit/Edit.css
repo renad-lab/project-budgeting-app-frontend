@@ -1,0 +1,88 @@
+.edit-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-container legend {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #654321;
+}
+
+.edit-container label {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  display: block;
+  color: #654321;
+}
+
+.edit-container input[type="text"],
+.edit-container input[type="number"],
+.edit-container input[type="date"],
+.edit-container textarea,
+.edit-container input[type="checkbox"] {
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.edit-container input[type="checkbox"] {
+  width: auto;
+}
+
+.edit-container input[type="submit"],
+.edit-container button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #654321;
+  color: whitesmoke;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-container input[type="submit"]:hover,
+.edit-container button:hover {
+  background-color: #543d29;
+}
+
+.edit-container button {
+  background-color: transparent;
+  color: #654321;
+  border: 1px solid #654321;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.edit-container button:hover {
+  background-color: #654321;
+  color: whitesmoke;
+}
+
+.edit-container button,
+.edit-container button:focus {
+  outline: none;
+}
+
+.link-back {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #654321;
+  text-decoration: none;
+}
+
+.link-back:hover {
+  text-decoration: underline;
+}

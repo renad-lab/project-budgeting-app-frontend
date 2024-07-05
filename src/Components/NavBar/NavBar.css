@@ -1,5 +1,4 @@
-/* NavBar.css */
-/* @import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
 
 .navbar {
   display: flex;
@@ -46,7 +45,7 @@
 
 .nav-link:hover {
   color: #bf8040;
-} */
+}
 
 .logo {
   text-decoration: none;
@@ -62,4 +61,14 @@
 .nav-link {
   text-decoration: none;
   color: whitesmoke;
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.divider {
+  margin: 0 10px;
+  border-left: 1px solid white;
+  height: 24px;
 }

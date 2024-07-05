@@ -1,4 +1,4 @@
-.transaction-chart {
+/* .transaction-chart {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,11 +34,11 @@
 
 .data-table th {
   background-color: #f2f2f2;
-  text-align: center; /* Center align text in headers */
-}
+  text-align: center; 
+/* }
 
 .data-table .amount {
-  text-align: right; /* Right align amount columns */
+  text-align: right; 
 }
 
 .data-table .income {
@@ -63,4 +63,45 @@
 
 .amount {
   text-align: right;
+}  */
+
+/* TransactionChart.css */
+.transaction-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart-container {
+  width: 80%;
+  height: 400px;
+  margin-bottom: 20px;
+}
+
+.table-container {
+  width: 80%;
+}
+
+.no-data {
+  color: red;
+}
+
+.amount {
+  font-weight: bold;
+}
+
+.amount.income {
+  color: green;
+}
+
+.amount.expense {
+  color: red;
+}
+
+.amount.net-income.positive {
+  color: green;
+}
+
+.amount.net-income.negative {
+  color: red;
 }
