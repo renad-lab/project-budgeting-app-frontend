@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./New.css";
 
@@ -17,6 +17,8 @@ const New = () => {
     return `${year}-${month}-${day}`;
   };
 
+  const [transactions, setTransactions] = useState([]);
+
   const [newTransaction, setNewTransaction] = useState({
     date: getTodayDate(),
     type: "",
@@ -30,7 +32,27 @@ const New = () => {
     recurring: false,
     origin: "",
     roast_level: "",
+    id: transactions[transactions.length - 1]?.id + 1,
   });
+
+  // const [newTransaction, setNewTransaction] = useState({
+  //   date: getTodayDate(),
+  //   type: "",
+  //   category: "",
+  //   description: "",
+  //   amount: 0.0,
+  //   quantity: 0,
+  //   unit: "",
+  //   entity: "",
+  //   best_by: "",
+  //   recurring: false,
+  //   origin: "",
+  //   roast_level: "",
+  //   id:
+  //     transactions.length > 0
+  //       ? transactions[transactions.length - 1].id + 1
+  //       : 1,
+  // });
 
   const API = import.meta.env.VITE_BASE_URL;
 
@@ -58,6 +80,19 @@ const New = () => {
       })
       .catch((err) => console.error(err));
   };
+
+  useEffect(() => {
+    fetch(API)
+      .then((res) => res.json())
+      .then((res) => {
+        setNewTransaction({
+          ...newTransaction,
+          id: res[res.length - 1]?.id + 1,
+        });
+        setTransactions(res);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
     <form onSubmit={handleSubmit} className="form-container">
