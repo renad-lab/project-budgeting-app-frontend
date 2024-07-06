@@ -1,6 +1,6 @@
 // import React, { useState, useEffect } from "react";
 // import { Link, useNavigate, useParams } from "react-router-dom";
-// // import "./Edit.css";
+// import "./Edit.css";
 
 // const Edit = () => {
 //   const API = import.meta.env.VITE_BASE_URL;
@@ -55,45 +55,50 @@
 
 //   if (!transaction) return <div>Loading...</div>;
 //   return (
-//     <div>
+//     <div className="edit-container">
 //       <form onSubmit={handleSubmit}>
 //         <fieldset>
 //           <legend>Edit Transaction</legend>
+//           <label htmlFor="item_name">Item Name</label>
 //           <input
 //             type="text"
-//             placeholder="Item Name"
+//             id="item_name"
 //             name="item_name"
 //             value={transaction.item_name}
 //             onChange={handleChange}
 //           />
 //           <br />
+//           <label htmlFor="amount">Amount</label>
 //           <input
 //             type="number"
-//             placeholder="Amount"
+//             id="amount"
 //             name="amount"
 //             value={transaction.amount}
 //             onChange={handleChange}
 //           />
 //           <br />
+//           <label htmlFor="date">Date</label>
 //           <input
 //             type="date"
-//             placeholder="Date"
+//             id="date"
 //             name="date"
 //             value={transaction.date}
 //             onChange={handleChange}
 //           />
 //           <br />
+//           <label htmlFor="from">From</label>
 //           <input
 //             type="text"
-//             placeholder="From"
+//             id="from"
 //             name="from"
 //             value={transaction.from}
 //             onChange={handleChange}
 //           />
 //           <br />
+//           <label htmlFor="category">Category</label>
 //           <input
 //             type="text"
-//             placeholder="Category"
+//             id="category"
 //             name="category"
 //             value={transaction.category}
 //             onChange={handleChange}
@@ -111,8 +116,8 @@
 //           <input type="submit" value="Submit" />
 //         </fieldset>
 //       </form>
-//       <Link to={`/transactions/${index}`}>
-//         <button>Back</button>
+//       <Link to={`/transactions/${index}`} className="link-back">
+//         Back
 //       </Link>
 //     </div>
 //   );
@@ -122,17 +127,34 @@
 
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import "./Edit.css";
+import {
+  TextField,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Checkbox,
+  FormControlLabel,
+  Button,
+  Box,
+} from "@mui/material";
 
 const Edit = () => {
   const API = import.meta.env.VITE_BASE_URL;
   const [transaction, setTransaction] = useState({
-    item_name: "",
-    amount: 0,
+    id: 0,
     date: new Date().toISOString().slice(0, 10),
-    from: "",
+    type: "",
     category: "",
+    description: "",
+    amount: 0,
+    quantity: 0,
+    unit: "",
+    entity: "",
+    best_by: "",
     recurring: false,
+    origin: "",
+    roast_level: "",
   });
   const navigate = useNavigate();
   const { index } = useParams();
@@ -176,72 +198,191 @@ const Edit = () => {
   };
 
   if (!transaction) return <div>Loading...</div>;
+
   return (
-    <div className="edit-container">
-      <form onSubmit={handleSubmit}>
-        <fieldset>
-          <legend>Edit Transaction</legend>
-          <label htmlFor="item_name">Item Name</label>
-          <input
-            type="text"
-            id="item_name"
-            name="item_name"
-            value={transaction.item_name}
-            onChange={handleChange}
-          />
-          <br />
-          <label htmlFor="amount">Amount</label>
-          <input
-            type="number"
-            id="amount"
-            name="amount"
-            value={transaction.amount}
-            onChange={handleChange}
-          />
-          <br />
-          <label htmlFor="date">Date</label>
-          <input
-            type="date"
-            id="date"
-            name="date"
-            value={transaction.date}
-            onChange={handleChange}
-          />
-          <br />
-          <label htmlFor="from">From</label>
-          <input
-            type="text"
-            id="from"
-            name="from"
-            value={transaction.from}
-            onChange={handleChange}
-          />
-          <br />
-          <label htmlFor="category">Category</label>
-          <input
-            type="text"
-            id="category"
-            name="category"
-            value={transaction.category}
-            onChange={handleChange}
-          />
-          <br />
-          <input
-            type="checkbox"
-            id="recurring"
-            name="recurring"
-            checked={transaction.recurring}
-            onChange={handleChange}
-          />
-          <label htmlFor="recurring">Recurring</label>
-          <br />
-          <input type="submit" value="Submit" />
-        </fieldset>
-      </form>
-      <Link to={`/transactions/${index}`} className="link-back">
-        Back
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      sx={{
+        width: "80%",
+        margin: "0 auto",
+        padding: "20px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <FormControl fullWidth margin="normal">
+        <TextField
+          label="Date"
+          type="date"
+          name="date"
+          value={transaction.date}
+          onChange={handleChange}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          size="small"
+          required
+        />
+      </FormControl>
+      <FormControl fullWidth margin="normal">
+        <InputLabel>Type</InputLabel>
+        <Select
+          name="type"
+          value={transaction.type}
+          onChange={handleChange}
+          size="small"
+          required
+        >
+          <MenuItem value="income">Income</MenuItem>
+          <MenuItem value="expense">Expense</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl fullWidth margin="normal">
+        <TextField
+          label="Category"
+          name="category"
+          value={transaction.category}
+          onChange={handleChange}
+          size="small"
+          required
+        />
+      </FormControl>
+      <FormControl fullWidth margin="normal">
+        <TextField
+          label="Description"
+          name="description"
+          value={transaction.description}
+          onChange={handleChange}
+          multiline
+          rows={3}
+          size="small"
+          required
+        />
+      </FormControl>
+      <FormControl fullWidth margin="normal">
+        <TextField
+          label="Amount"
+          type="number"
+          name="amount"
+          value={transaction.amount}
+          onChange={handleChange}
+          size="small"
+          required
+        />
+      </FormControl>
+      <FormControl fullWidth margin="normal">
+        <TextField
+          label="Quantity"
+          type="number"
+          name="quantity"
+          value={transaction.quantity}
+          onChange={handleChange}
+          size="small"
+          required
+        />
+      </FormControl>
+      <FormControl fullWidth margin="normal">
+        <TextField
+          label="Unit"
+          name="unit"
+          value={transaction.unit}
+          onChange={handleChange}
+          size="small"
+          required
+        />
+      </FormControl>
+      <FormControl fullWidth margin="normal">
+        <TextField
+          label="Entity"
+          name="entity"
+          value={transaction.entity}
+          onChange={handleChange}
+          size="small"
+          required
+        />
+      </FormControl>
+      <FormControl fullWidth margin="normal">
+        <TextField
+          label="Best By"
+          type="date"
+          name="best_by"
+          value={transaction.best_by}
+          onChange={handleChange}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          size="small"
+        />
+      </FormControl>
+      <FormControl fullWidth margin="normal">
+        <FormControlLabel
+          control={
+            <Checkbox
+              name="recurring"
+              checked={transaction.recurring}
+              onChange={handleChange}
+            />
+          }
+          label="Recurring"
+        />
+      </FormControl>
+      <FormControl fullWidth margin="normal">
+        <TextField
+          label="Origin"
+          name="origin"
+          value={transaction.origin}
+          onChange={handleChange}
+          size="small"
+        />
+      </FormControl>
+      <FormControl fullWidth margin="normal">
+        <InputLabel>Roast Level</InputLabel>
+        <Select
+          name="roast_level"
+          value={transaction.roast_level}
+          onChange={handleChange}
+          size="small"
+        >
+          <MenuItem value="">Select Roast Level</MenuItem>
+          <MenuItem value="light">Light</MenuItem>
+          <MenuItem value="medium">Medium</MenuItem>
+          <MenuItem value="dark">Dark</MenuItem>
+          <MenuItem value="green">Green</MenuItem>
+        </Select>
+      </FormControl>
+      <Button
+        type="submit"
+        variant="contained"
+        sx={{
+          backgroundColor: "#6F4E37", // Coffee color
+          color: "#fff",
+          "&:hover": {
+            backgroundColor: "#5C4033", // Darker coffee color on hover
+          },
+        }}
+      >
+        Submit
+      </Button>
+      <Link
+        to={`/transactions/${index}`}
+        style={{ marginTop: "20px", textDecoration: "none" }}
+      >
+        <Button
+          variant="contained"
+          sx={{
+            backgroundColor: "#6F4E37", // Coffee color
+            color: "#fff",
+            "&:hover": {
+              backgroundColor: "#5C4033", // Darker coffee color on hover
+            },
+          }}
+        >
+          Back
+        </Button>
       </Link>
-    </div>
+    </Box>
   );
 };
 
