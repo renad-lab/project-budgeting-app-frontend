@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
 
 .navbar {
   display: flex;
@@ -71,4 +71,38 @@
   margin: 0 10px;
   border-left: 1px solid white;
   height: 24px;
+} */
+
+.sticky-nav {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+}
+
+.logo {
+  font-family: "Shadows Into Light", cursive;
+  font-size: 2rem;
+  margin: 0;
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+.budget-tracker {
+  font-family: Arial, sans-serif;
+  font-size: 0.8rem;
+  font-variant: small-caps;
+  margin-top: 5px;
+  color: whitesmoke;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: whitesmoke;
+  margin-left: 20px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.nav-link:hover {
+  color: #bf8040;
 }

@@ -137,6 +137,7 @@ import {
   FormControlLabel,
   Button,
   Box,
+  Grid,
 } from "@mui/material";
 
 const Edit = () => {
@@ -352,36 +353,44 @@ const Edit = () => {
           <MenuItem value="green">Green</MenuItem>
         </Select>
       </FormControl>
-      <Button
-        type="submit"
-        variant="contained"
-        sx={{
-          backgroundColor: "#6F4E37", // Coffee color
-          color: "#fff",
-          "&:hover": {
-            backgroundColor: "#5C4033", // Darker coffee color on hover
-          },
-        }}
+      <Grid
+        container
+        spacing={2}
+        justifyContent="center"
+        sx={{ marginTop: "20px" }}
       >
-        Submit
-      </Button>
-      <Link
-        to={`/transactions/${index}`}
-        style={{ marginTop: "20px", textDecoration: "none" }}
-      >
-        <Button
-          variant="contained"
-          sx={{
-            backgroundColor: "#6F4E37", // Coffee color
-            color: "#fff",
-            "&:hover": {
-              backgroundColor: "#5C4033", // Darker coffee color on hover
-            },
-          }}
-        >
-          Back
-        </Button>
-      </Link>
+        <Grid item>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{
+              backgroundColor: "#6F4E37", // Coffee color
+              color: "#fff",
+              "&:hover": {
+                backgroundColor: "#5C4033", // Darker coffee color on hover
+              },
+            }}
+          >
+            Submit
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button
+            component={Link}
+            to={`/transactions/${index}`}
+            variant="contained"
+            sx={{
+              backgroundColor: "#6F4E37", // Coffee color
+              color: "#fff",
+              "&:hover": {
+                backgroundColor: "#5C4033", // Darker coffee color on hover
+              },
+            }}
+          >
+            Back
+          </Button>
+        </Grid>
+      </Grid>
     </Box>
   );
 };
