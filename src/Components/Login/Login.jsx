@@ -1,5 +1,3 @@
-// Login.js
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -9,7 +7,9 @@ import {
   Container,
   Box,
   Paper,
+  Grid,
 } from "@mui/material";
+import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -28,12 +28,12 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulate authentication logic (replace with actual logic)
+
     if (formData.username === "demo" && formData.password === "password") {
-      // Navigate to dashboard or protected route after successful login
+      // Replace with actual login logic
+      // For demo purposes, assume login is successful
       navigate("/");
     } else {
-      // Handle invalid credentials
       alert("Invalid username or password");
     }
   };
@@ -41,42 +41,49 @@ const Login = () => {
   return (
     <Container maxWidth="xs">
       <Paper elevation={3} sx={{ padding: "20px", marginTop: "50px" }}>
-        <Typography variant="h5" component="h2" gutterBottom>
+        <Typography variant="h5" component="h2" align="center" gutterBottom>
           Login
         </Typography>
-        <Box component="form" onSubmit={handleSubmit}>
-          <TextField
-            type="text"
-            label="Username"
-            name="username"
-            fullWidth
-            margin="normal"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
-          <TextField
-            type="password"
-            label="Password"
-            name="password"
-            fullWidth
-            margin="normal"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                type="text"
+                label="Username"
+                name="username"
+                fullWidth
+                variant="outlined"
+                value={formData.username}
+                onChange={handleChange}
+                required
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                type="password"
+                label="Password"
+                name="password"
+                fullWidth
+                variant="outlined"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </Grid>
+          </Grid>
           <Button
             type="submit"
             variant="contained"
             color="primary"
             fullWidth
-            sx={{ marginTop: "20px" }}
+            sx={{ mt: 2 }}
           >
             Login
           </Button>
         </Box>
-        <Typography variant="body2" sx={{ marginTop: "10px" }}>
-          Don't have an account?{" "}
+        <Typography variant="body2" align="center" sx={{ mt: 2 }}>
+          Don't have a{" "}
+          <strong className="coffeebeanies-text">coffeebeanies</strong> account?{" "}
           <Link to="/signup" style={{ textDecoration: "none" }}>
             Sign Up
           </Link>
