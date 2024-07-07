@@ -57,12 +57,16 @@
 
 //     const result = transactions.reduce(
 //       (acc, transaction) => {
+//         const total = transaction.quantity
+//           ? transaction.amount * transaction.quantity
+//           : transaction.amount * 1;
+
 //         if (transaction.type === "income") {
-//           acc.income += Number(transaction.amount);
-//           acc.incomeTransactions.push(transaction);
+//           acc.income += total;
+//           acc.incomeTransactions.push({ ...transaction, total });
 //         } else if (transaction.type === "expense") {
-//           acc.expense += Math.abs(Number(transaction.amount));
-//           acc.expenseTransactions.push(transaction);
+//           acc.expense += Math.abs(total);
+//           acc.expenseTransactions.push({ ...transaction, total });
 //         }
 //         return acc;
 //       },
@@ -136,7 +140,7 @@
 //             <Box sx={{ margin: 1 }}>
 //               <Typography variant="body2">
 //                 <strong>{transaction.date}</strong>: {transaction.description} -
-//                 ${transaction.amount.toLocaleString()}
+//                 ${transaction.total.toLocaleString()}
 //               </Typography>
 //             </Box>
 //           </Collapse>
@@ -208,7 +212,7 @@
 //                 renderTransactionRows(expenseTransactions)}
 //               <TableRow>
 //                 <TableCell />
-//                 <TableCell>Net Income</TableCell>
+//                 <TableCell style={{ fontWeight: "bold" }}>Net Income</TableCell>
 //                 <TableCell
 //                   align="right"
 //                   className={`amount net-income ${
@@ -236,7 +240,6 @@ import {
   CategoryScale,
   LinearScale,
   BarElement,
-  Title,
   Tooltip,
   Legend,
 } from "chart.js";
@@ -257,14 +260,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import "./TransactionChart.css";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const TransactionChart = ({ transactions }) => {
   const [selectedType, setSelectedType] = useState(null);
@@ -351,10 +347,6 @@ const TransactionChart = ({ transactions }) => {
     plugins: {
       legend: {
         display: true,
-      },
-      title: {
-        display: true,
-        text: "Income vs Expense",
       },
     },
   };

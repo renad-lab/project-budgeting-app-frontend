@@ -1,3 +1,5 @@
+/* NavBar.css */
+
 /* @import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap"); */
 
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
@@ -6,6 +8,7 @@
   position: sticky !important;
   top: 0 !important;
   z-index: 1000 !important;
+  margin-bottom: 28px;
 }
 
 .logo {

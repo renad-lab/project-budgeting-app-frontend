@@ -76,6 +76,7 @@ const NavBar = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
+        marginBottom: "28px",
       }}
     >
       <Toolbar>
