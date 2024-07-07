@@ -1,60 +1,4 @@
 /* .form-container {
-  max-width: 500px;
-  margin: 28px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  background-image: url("./coffee-beans-top-view-white-background-space-text.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  font-family: Arial, sans-serif;
-}
-
-.fieldset {
-  border: none;
-  padding: 0;
-  margin: 0;
-}
-
-.legend {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  font-weight: bold;
-  color: #5d4037;
-}
-
-.input-field {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  box-sizing: border-box;
-}
-
-.input-field:focus {
-  outline: none;
-  border-color: #bf8040;
-}
-
-.submit-button {
-  background-color: #4a2c20;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1rem;
-  border-radius: 3px;
-  cursor: pointer;
-}
-
-.submit-button:hover {
-  background-color: #5d4037;
-} */
-
-.form-container {
   max-width: 600px;
   margin: 28px auto;
   padding: 20px;
@@ -107,5 +51,63 @@
 }
 
 .submit-button:hover {
+  background-color: #451e0e;
+} */
+
+/* New.css */
+
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-image: url("./coffee-beans-top-view-white-background-space-text.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-family: Arial, sans-serif;
+}
+
+.form-container .fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.form-container .legend {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #603c1c;
+}
+
+.form-container .input-field {
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-container .input-field:focus {
+  outline: none;
+  border-color: #bf8040;
+}
+
+.form-container .submit-button {
+  background-color: #603c1c;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-container .submit-button:hover {
   background-color: #451e0e;
 }

@@ -55,6 +55,7 @@ import Show from "./Components/Show/Show";
 import New from "./Components/New/New";
 import Edit from "./Components/Edit/Edit";
 import Home from "./Components/Home/Home";
+// import Login from "./Components/Login/Login";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -62,7 +63,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     text: {
-      primary: "#6F4E37", // Coffee brown color for text
+      primary: "#6F4E37",
     },
   },
 });
@@ -73,6 +74,7 @@ function App() {
       <div>
         <NavBar />
         <Routes>
+          {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/" element={<Navigate to="/transactions" replace />} />
           <Route path="/transactions" element={<Home />} />
           <Route path="/transactions/new" element={<New />} />
