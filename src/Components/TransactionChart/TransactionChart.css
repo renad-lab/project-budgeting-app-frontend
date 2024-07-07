@@ -8,14 +8,22 @@
   width: 80%;
   height: 400px;
   margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.5); 
+  border-radius: 10px;
+  padding: 20px;
 }
 
 .table-container {
   width: 80%;
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.5); 
+  border-radius: 10px;
+  padding: 20px;
 }
 
 .no-data {
-  color: red;
+  color: rgba(255, 0, 0, 0.8); 
 }
 
 .amount {
@@ -23,17 +31,29 @@
 }
 
 .amount.income {
-  color: green;
+  color: rgba(0, 128, 0, 0.8); 
 }
 
 .amount.expense {
-  color: red;
+  color: rgba(255, 0, 0, 0.8); 
 }
 
 .amount.net-income.positive {
-  color: green;
+  color: rgba(0, 128, 0, 0.8); 
 }
 
 .amount.net-income.negative {
-  color: red;
+  color: rgba(255, 0, 0, 0.8); 
+}
+
+.table-container .MuiPaper-root {
+  background-color: transparent !important; 
+}
+
+.table-container .MuiTable-root {
+  background-color: transparent !important; 
+}
+
+.table-container .MuiTableCell-root {
+  background-color: transparent !important; /
 }

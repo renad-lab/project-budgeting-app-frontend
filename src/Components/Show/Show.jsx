@@ -37,7 +37,7 @@ const Show = () => {
         width: "80%",
         margin: "0 auto",
         padding: "20px",
-        color: "#6F4E37", // Set coffee brown color
+        color: "#6F4E37",
       }}
     >
       <Typography variant="h4" component="h1" gutterBottom>

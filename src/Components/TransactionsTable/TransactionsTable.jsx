@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import {
@@ -13,13 +13,25 @@ import {
   TableRow,
   Typography,
   Paper,
+  TablePagination,
 } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import "./TransactionsTable.css";
 
 const TransactionsTable = ({ transactions }) => {
-  const [openRow, setOpenRow] = React.useState(null);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(8);
+  const [openRow, setOpenRow] = useState(null);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0); // Reset page to 0 when changing rows per page
+  };
 
   const handleRowClick = (rowId) => {
     setOpenRow(openRow === rowId ? null : rowId);
@@ -37,7 +49,12 @@ const TransactionsTable = ({ transactions }) => {
 
   const netIncomeColor = netIncome >= 0 ? "green" : "red";
 
-  const rows = transactions.map((transaction) => (
+  const sortedTransactions = transactions.slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage
+  );
+
+  const rows = sortedTransactions.map((transaction) => (
     <React.Fragment key={transaction.id}>
       <TableRow>
         <TableCell>
@@ -156,20 +173,38 @@ const TransactionsTable = ({ transactions }) => {
     </TableRow>
   );
 
+  // Calculate the range of transactions being displayed
+  const firstTransactionIndex = page * rowsPerPage + 1;
+  const lastTransactionIndex = page * rowsPerPage + sortedTransactions.length;
+
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell align="center">Date</TableCell>
-            <TableCell align="center">Description</TableCell>
-            <TableCell align="center">Total ($)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>{rows}</TableBody>
-      </Table>
-    </TableContainer>
+    <Paper className="transactions-table-container">
+      <TableContainer>
+        <Table aria-label="collapsible table">
+          <TableHead>
+            <TableRow>
+              <TableCell />
+              <TableCell align="center">Date</TableCell>
+              <TableCell align="center">Description</TableCell>
+              <TableCell align="center">Total ($)</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>{rows}</TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        component="div"
+        count={transactions.length}
+        rowsPerPageOptions={[8, 16, 24, 100]}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        labelDisplayedRows={({ from, to, count }) =>
+          `Transactions ${from} - ${to} out of ${count}`
+        }
+      />
+    </Paper>
   );
 };
 
