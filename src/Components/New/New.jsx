@@ -110,7 +110,7 @@ const New = () => {
           color: "#6F4E37",
         }}
       >
-        Add New Transaction
+        Add Transaction
       </h1>
       <FormControl fullWidth margin="normal">
         <TextField
